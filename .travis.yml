@@ -19,7 +19,6 @@ before_script:
   - "docker pull lambci/lambda:build-python3.8"
 
 script:
-  - "docker build . -t layer --build-arg ${DOTNET_VERSION}"
   - "make docker"
   - "make layer"
   - "make test"
