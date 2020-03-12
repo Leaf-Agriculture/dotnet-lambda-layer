@@ -1,7 +1,7 @@
 .PHONY: docker layer clean test
 
-
 docker:
+	docker build --build-arg "DOTNET_VERSION=$(DOTNET_VERSION)" . -t layer
 	docker run --rm -td --name lambda -v $(shell pwd):/tmp/build layer bash
 
 layer:
