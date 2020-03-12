@@ -1,6 +1,8 @@
 set -v
 
-DOTNET_VERSION=$1
+DOTNET_VERSION=$(echo $1 | sed 's/\.//')
+
+echo "Deploying layer for dotnet ${DOTNET_VERSION}"
 
 AWS_REGIONS=(
     ap-northeast-1
