@@ -1,0 +1,38 @@
+os: "linux"
+
+services:
+  - "docker"
+
+language: "python"
+
+python:
+  - "3.8"
+
+env:
+  - DOTNET_VERSION=3.1
+  - DOTNET_VERSION=2.1
+
+before_script:
+  - "docker pull lambci/lambda:python3.6"
+  - "docker pull lambci/lambda:python3.7"
+  - "docker pull lambci/lambda:python3.8"
+  - "docker pull lambci/lambda:build-python3.8"
+
+script:
+  - "docker build . -t layer --build-arg ${DOTNET_VERSION}"
+  - "make docker"
+  - "make layer"
+  - "make test"
+
+before_deploy:
+  - "sudo pip install awscli"
+
+deploy:
+  - provider: "script"
+    script: "bash deploy.sh ${DOTNET_VERSION}"
+    edge: "true"
+    on:
+      branch: "master"
+
+after_deploy:
+  - "make clean"
