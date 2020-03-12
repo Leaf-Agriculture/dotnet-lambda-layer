@@ -13,7 +13,7 @@ clean:
 	docker kill lambda
 
 test:
-	unzip -q layer.zip -d layer
+	unzip -qo layer.zip -d layer
 
 	docker run \
 		--rm \

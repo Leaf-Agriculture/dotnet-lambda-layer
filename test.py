@@ -3,7 +3,5 @@ import subprocess
 
 def handler(e, c):
     subprocess.run(['ls', '-l', '/opt/bin'])
-    subprocess.run(['dotnet', '--list-sdks'])
-    subprocess.run(['dotnet', '--list-runtimes'])
-    subprocess.run(['dotnet', 'nice/out/nice.dll'])
+    assert subprocess.run(['dotnet', '--info']).returncode == 0
     return e
