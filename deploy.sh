@@ -28,7 +28,7 @@ for AWS_REGION in "${AWS_REGIONS[@]}"; do
 
     echo "Publishing layer to region ${AWS_REGION}"
     aws lambda publish-layer-version \
-        --layer-name  "dotnet-${DOTNET_VERSION}" \
+        --layer-name "dotnet${DOTNET_VERSION}" \
         --description "dotnet runtime for everyone!" \
         --compatible-runtimes  "python3.6" "python3.7" "python3.8" \
         --license-info "MIT" \
@@ -38,7 +38,7 @@ for AWS_REGION in "${AWS_REGIONS[@]}"; do
     LAYER_VERSION=$(jq -r '.Version' layer.json)
     echo "Updating permissions for version ${LAYER_VERSION}"
     aws lambda add-layer-version-permission \
-        --layer-name "dotnet-${DOTNET_VERSION}" \
+        --layer-name "dotnet${DOTNET_VERSION}" \
         --statement-id make_public \
         --version-number ${LAYER_VERSION} \
         --principal '*' \
