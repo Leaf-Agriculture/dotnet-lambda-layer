@@ -89,7 +89,3 @@ def handler(e, c):
     subprocess.run(['dotnet', 'sample/example.dll'])
     return e
 ```
-
-### .NET build
-You need to build your project correctly for it to be able to work in the lambda. See the folowing example:
-
